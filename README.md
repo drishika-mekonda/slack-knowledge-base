@@ -4,45 +4,6 @@ A production-quality MVP for an AI-powered Slack Knowledge Base built with FastA
 
 ---
 
-## Architecture Diagram
-
-```mermaid
-graph TD
-    %% User/Slack Client
-    U[User/Browser] <-->|JWT Auth / HTTP API| F[React Frontend (Nginx)]
-    S[Slack Workspace] <-->|Fetch channel/thread history| SlackClient[Slack WebClientWrapper]
-    
-    %% API Gateway / Controllers
-    F <-->|Proxy API /api/| B[FastAPI Backend]
-    
-    %% Services
-    B -->|Ingest Slack transcript| SlackService[Slack Ingest Service]
-    B -->|Ingest PDF upload| DocService[PDF Upload Service]
-    B -->|Q&A / History| ChatService[Multi-turn Chat Service]
-    B -->|Generate summary| SummaryService[Summarization Service]
-    
-    %% Document parsing & chunking
-    DocService -->|Extract text| pdfplumber[pdfplumber PDF parser]
-    pdfplumber --> Chunker[Sentence-Aware Chunker]
-    SlackService -->|Format transcripts| Chunker
-    
-    %% Embeddings & Generation
-    Chunker -->|Texts| GeminiEmbed[GeminiEmbeddingFunction]
-    GeminiEmbed -->|Embeddings| Chroma[ChromaDB persistent collection]
-    
-    %% RAG Retrieval
-    ChatService -->|Embed query & Retrieve| Retriever[Retriever]
-    Retriever -->|Metadata filters: personal, team, org| Chroma
-    Retriever -->|Context chunks + history| Generator[Response Generator]
-    Generator -->|Zero-temperature generation| GeminiFlash[Gemini 2.5 Flash]
-    GeminiFlash -->|Grounded answers + citations| ChatService
-    
-    %% Metadata store
-    SlackService & DocService & ChatService & SummaryService <-->|CRUD operations| SQLite[(SQLite Database)]
-```
-
----
-
 ## Core Features
 
 1. **Secure Access Control Scopes**:
