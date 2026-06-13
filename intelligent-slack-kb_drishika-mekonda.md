@@ -7,9 +7,9 @@
 ## Attendee Details
 
 **Name:** Drishika Mekonda
-**GitHub Username:** YOUR_GITHUB_USERNAME <!-- Replace with your GitHub Username -->
+**GitHub Username:** drishika-mekonda
 **LinkedIn Profile:** `https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME` <!-- Replace with your LinkedIn profile link -->
-**GitHub Project Repository:** `https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME` <!-- Replace with your public repository link -->
+**GitHub Project Repository:** `https://github.com/drishika-mekonda/slack-knowledge-base`
 
 ---
 
